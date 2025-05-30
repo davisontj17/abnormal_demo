@@ -68,10 +68,11 @@ As of 20:25 UTC, the backlog of messages from the incident has been fully proces
 
 Now write an incident update for the following:
 
-Incident Type: {incident_type}
-Severity: {severity}
-Affected Services: {affected_services}
-Summary: {summary}
+Incident Type: {st.session_state.incident_type}
+Severity: {st.session_state.severity}
+Affected Services: {st.session_state.affected_services}
+Summary: {st.session_state.summary}
+Timestamp: {timestamp}
 
 Update:
 """
