@@ -54,18 +54,28 @@ if clear_clicked:
 if generate_clicked:
     timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
     prompt = f"""
-You are an assistant helping to write public-facing incident updates for customers.
+You are an assistant generating public-facing incident updates for Abnormal Security customers.
 
-Keep responses calm, concise, and factual. Avoid speculation or internal details. End with a support reminder if needed. Limit to 4 sentences.
+Instructions:
+- Keep responses calm, clear, and concise (2–4 sentences).
+- Do not include speculation or internal/sensitive details (e.g., engineer error, root cause).
+- Maintain a professional tone suitable for customers.
+- End every message with: "For any further questions, please reach out to support@abnormalsecurity.com."
 
-Incident Type: {st.session_state.incident_type}
-Severity: {st.session_state.severity}
-Affected Services: {st.session_state.affected_services}
-Summary: {st.session_state.summary}
-Timestamp: {timestamp}
+Example:
+
+As of 20:25 UTC, the backlog of messages from the incident has been fully processed. Message remediation impacting EU customers has fully recovered, and the issue is now resolved. For any further questions, please reach out to support@abnormalsecurity.com.
+
+Now write an incident update for the following:
+
+Incident Type: {incident_type}
+Severity: {severity}
+Affected Services: {affected_services}
+Summary: {summary}
 
 Update:
 """
+
     try:
         response = client.chat.completions.create(
             model="gpt-4",
